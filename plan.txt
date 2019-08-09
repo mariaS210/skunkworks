@@ -1,0 +1,26 @@
+react components:
+item component
+	upvote component
+	summary/status component
+	title component (with url)
+list component (with item components)
+detailview component
+	comments list component
+		add comment
+		comments list/tree
+		reply component
+		comment component (user, time, upvote, comment, reply)
+
+---------------------
+filters:
+ask component/filter
+show component/filter
+new component/filter
+past component/filter
+---------------------
+
+
+
+
+
+
