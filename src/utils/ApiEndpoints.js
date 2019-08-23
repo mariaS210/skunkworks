@@ -1,7 +1,7 @@
 const BASE_URL = "https://hacker-news.firebaseio.com";
 
 class ApiEndpoints {
-    static getNewsItem(itemId) {
+    static getNewsItem(itemId, callback) {
         let request = new Request(`${BASE_URL}/v0/item/${itemId}.json`);
         fetch(request)
             .then(response => {
@@ -12,7 +12,7 @@ class ApiEndpoints {
                 }
             })
             .then(response => {
-                console.debug(response);
+                callback && callback(response);
             }).catch(error => {
                 console.error(error);
             });
