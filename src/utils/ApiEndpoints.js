@@ -6,7 +6,7 @@ class ApiEndpoints {
         fetch(request)
             .then(response => {
                 if (response.status === 200) {
-                    return response.json();;
+                    return response.json();
                 } else {
                     throw new Error('Something went wrong on api server!');
                 }
