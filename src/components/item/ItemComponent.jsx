@@ -1,9 +1,12 @@
 import React from 'react';
+import UpvoteComponent from './UpvoteComponent'
 
 class ItemComponent extends React.Component {
     render() {
         return (
-            <p> Item Component </p>
+            <div> Item Component
+                <UpvoteComponent />
+            </div>
         )
     }
 }
