@@ -8,7 +8,7 @@ class SummaryComponent extends React.Component {
     render() {
       if (this.props && this.props.item) {
         let author = this.props.item.by;
-        let points = this.props.item.score;
+        let points = this.props.score;
         let time = this.props.item.time;
         let comments = this.props.item.kids.length;
         let postDate = new Date(time * 1000);

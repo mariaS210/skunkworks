@@ -5,7 +5,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-        <ItemComponent itemId={20775773}/>
+        <ItemComponent 
+          itemId={20775773}
+          index={1}/>
     </div>
   );
 }

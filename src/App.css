@@ -10,6 +10,16 @@
 
 .Upvote {
   font-size: 10pt;
+  display: inline-block;
+}
+
+.UpvoteURL {
+  color: greenyellow;
+  display: inline-block;
+}
+
+.UpvoteURL:hover {
+  cursor: pointer;
 }
 
 .App-header {
