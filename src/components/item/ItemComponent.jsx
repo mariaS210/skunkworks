@@ -26,7 +26,7 @@ class ItemComponent extends React.Component {
         let item = this.state.item;
         return (
             <div> Item Component
-                <SummaryComponent />
+                <SummaryComponent item={item}/>
                 <UpvoteComponent item={item}/>
             </div>
         )
