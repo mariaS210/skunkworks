@@ -1,7 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
-import ApiEndpoints from '../../utils/ApiEndpoints';
 
 
 class SummaryComponent extends React.Component {
