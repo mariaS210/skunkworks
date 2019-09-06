@@ -1,13 +1,11 @@
 import React from 'react';
-import ItemComponent from './components/item/ItemComponent'
+import ItemListComponent from './components/list/ItemListComponent'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-        <ItemComponent 
-          itemId={20775773}
-          index={1}/>
+        <ItemListComponent/>
     </div>
   );
 }

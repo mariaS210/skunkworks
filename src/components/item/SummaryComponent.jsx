@@ -7,7 +7,7 @@ class SummaryComponent extends React.Component {
         let author = this.props.item.by;
         let points = this.props.score;
         let time = this.props.item.time;
-        let comments = this.props.item.kids.length;
+        let comments = this.props.item.kids ? this.props.item.kids.length : 0;
         let postDate = new Date(time * 1000);
         let timeDiff = Math.abs(Date.now() - postDate) / 36e5; // in hours
         let timeUnit = "hours"
