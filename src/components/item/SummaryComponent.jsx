@@ -1,7 +1,22 @@
 import React from 'react';
+import CommentComponent from './CommentComponent';
 
 
 class SummaryComponent extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        showComments: false
+      };
+    }
+
+    changeShowComments = () => {
+        let oldShowComments = this.state.showComments;
+        this.setState({
+          showComments: !oldShowComments 
+        });
+    }
+
     render() {
       if (this.props && this.props.item) {
         let author = this.props.item.by;
@@ -15,8 +30,14 @@ class SummaryComponent extends React.Component {
           timeUnit = "days";
           timeDiff /=24;
         }
+        let shouldRenderComments = this.state.showComments;
 
-         return <div>{points} points by {author} | {Math.floor(timeDiff)} {timeUnit} ago | {comments} comments</div>;
+         return (<div>
+          {points} points by {author} |
+          {Math.floor(timeDiff)} {timeUnit} ago |
+          <span className="Comment" onClick={this.changeShowComments}>{comments} comments</span>
+          {shouldRenderComments && <CommentComponent item={this.props.item}/>}
+         </div>);
       } else {
         return <div>No data available.</div>
       }
