@@ -26,16 +26,22 @@ class CommentComponent extends React.Component {
     render() {
         let comments = this.state.comments;
         let index = 1;
-        return (
-            <div>
-                Comments
-                {comments && comments.map(function(comment) {
-                    return <p>{index++}. {comment.text}</p>;
-                })}
-                {!comments && <p>No comments.</p>}
-            </div>
-
-        )
+        if (comments.length > 0) {
+            return (
+                <div>
+                    Comments
+                    {comments.map(function(comment) {
+                        if (!comment.deleted) {
+                            return <p key={comment.id}>{index++}. {comment.text}</p>;
+                        } else {
+                            return <div><i>Deleted.</i></div>
+                        }
+                    })}
+                </div>
+            );
+        } else {
+            return <div><i>No comments.</i></div>;
+        }
     }
 
 }

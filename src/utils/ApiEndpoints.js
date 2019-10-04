@@ -37,14 +37,16 @@ class ApiEndpoints {
 
     static getBulkNewsItems(items, callback) {
         let requests = []
-        items.forEach(itemId => {
-            requests.push(new Request(`${BASE_URL}/v0/item/${itemId}.json`));
-        });
-        Promise.all(requests.map(request =>
-            fetch(request).then(response => response.json())
-        )).then(responses => {
-            callback(responses);
-        });
+        if (items && callback) {
+            items.forEach(itemId => {
+                requests.push(new Request(`${BASE_URL}/v0/item/${itemId}.json`));
+            });
+            Promise.all(requests.map(request =>
+                fetch(request).then(response => response.json())
+            )).then(responses => {
+                callback(responses);
+            });
+        }
     }
 }
 
