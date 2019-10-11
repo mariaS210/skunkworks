@@ -9,7 +9,8 @@ class ItemListComponent extends React.Component {
         super(props);
         this.state = {
             items: null,
-            isLoading: false
+            isLoading: false,
+            openedStory: 0
         };
     }
 
@@ -18,6 +19,19 @@ class ItemListComponent extends React.Component {
                     items: response
                 })
         );
+    }
+
+    changeOpenedStory = (storyId) => {
+        let oldStoryId = this.state.openedStory;
+        if (!storyId || oldStoryId === storyId) {
+            this.setState({
+                openedStory: 0
+            }); // just close opened story
+            return
+        }
+        this.setState({
+            openedStory: storyId // new story opened
+        });
     }
 
     render() {
@@ -29,7 +43,11 @@ class ItemListComponent extends React.Component {
         return (
             <div>
                 {newsItems.map((item, index) => (
-                    <ItemComponent key={index} index={index} itemId={item} />
+                    <ItemComponent key={index}
+                                   index={index}
+                                   itemId={item}
+                                   changeOpenedStory={this.changeOpenedStory}
+                                   openedStory={this.state.openedStory}/>
                 ))}
             </div>
         )

@@ -30,13 +30,14 @@ class SummaryComponent extends React.Component {
           timeUnit = "days";
           timeDiff /=24;
         }
-        let shouldRenderComments = this.state.showComments;
+        let shouldRenderComments = (this.props.openedStory === this.props.item.id)//this.state.showComments;
 
          return (<div>
           {points} points by {author} |
           {Math.floor(timeDiff)} {timeUnit} ago |
-          <span className="Comment" onClick={this.changeShowComments}>{comments} comments</span>
-          {shouldRenderComments && <CommentComponent item={this.props.item}/>}
+          <span className="Comment" onClick={() => {
+            this.props.changeOpenedStory(this.props.item.id);}}>{comments} comments</span>
+          {shouldRenderComments && <CommentComponent key={this.props.item.id} item={this.props.item}/>}
          </div>);
       } else {
         return <div>No data available.</div>

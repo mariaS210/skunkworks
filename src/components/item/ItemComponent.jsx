@@ -59,7 +59,10 @@ class ItemComponent extends React.Component {
             <div>
                 {itemNo}. <UpvoteComponent upvoteAction={this.upvoteAction}/>
                 <a href={itemLink}>{itemTitle}</a> ({url.hostname})
-                <SummaryComponent item={item} score={score}/>
+                <SummaryComponent item={item}
+                                  score={score}
+                                  changeOpenedStory={this.props.changeOpenedStory}
+                                  openedStory={this.props.openedStory}/>
             </div>
         )
     }
