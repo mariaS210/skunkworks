@@ -1,5 +1,7 @@
 import React from 'react';
 
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import ApiEndpoints from '../../utils/ApiEndpoints';
 import ItemComponent from '../item/ItemComponent';
 
@@ -15,9 +17,13 @@ class ItemListComponent extends React.Component {
     }
 
     componentDidMount() {
+        this.loadItems();
+    }
+
+    loadItems = () => {
         ApiEndpoints.getNewsItems(response => this.setState({
-                    items: response
-                })
+            items: response
+        })
         );
     }
 
@@ -42,13 +48,24 @@ class ItemListComponent extends React.Component {
 
         return (
             <div>
-                {newsItems.map((item, index) => (
-                    <ItemComponent key={index}
-                                   index={index}
-                                   itemId={item}
-                                   changeOpenedStory={this.changeOpenedStory}
-                                   openedStory={this.state.openedStory}/>
-                ))}
+                <InfiniteScroll
+                    dataLength={newsItems.length} //This is important field to render the next data
+                    next={this.loadItems}
+                    hasMore={true}
+                    loader={<h4>Loading...</h4>}
+                    endMessage={
+                        <p style={{ textAlign: 'center' }}>
+                            <b>Yay! You have seen it all</b>
+                        </p>
+                    }>
+                    {newsItems.map((item, index) => (
+                        <ItemComponent key={index}
+                            index={index}
+                            itemId={item}
+                            changeOpenedStory={this.changeOpenedStory}
+                            openedStory={this.state.openedStory} />
+                    ))}
+                </InfiniteScroll>
             </div>
         )
     }

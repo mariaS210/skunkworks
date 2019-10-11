@@ -1,4 +1,7 @@
 const BASE_URL = "https://hacker-news.firebaseio.com";
+let cursor = 0;
+let limitCounter = 30;
+let newsItems = []
 
 class ApiEndpoints {
     static getNewsItem(itemId, callback) {
@@ -19,6 +22,11 @@ class ApiEndpoints {
     }
 
     static getNewsItems(callback) {
+        if (newsItems.length > 0) {
+            cursor = cursor + limitCounter;
+            let result = newsItems.slice(0, cursor);
+            return callback(result);
+        }
         let request = new Request(`${BASE_URL}/v0/topstories.json`);
         fetch(request)
             .then(response => {
@@ -29,7 +37,10 @@ class ApiEndpoints {
                 }
             })
             .then(response => {
-                callback && callback(response);
+                newsItems = response;
+                cursor = cursor + limitCounter;
+                let result = response.slice(0, cursor);
+                callback && callback(result);
             }).catch(error => {
                 console.error(error);
             });
