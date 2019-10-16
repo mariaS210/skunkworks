@@ -41,7 +41,7 @@ class ItemListComponent extends React.Component {
         }
 
         return (
-            <div>
+            <div class="container">
                 {newsItems.map((item, index) => (
                     <ItemComponent key={index}
                                    index={index}

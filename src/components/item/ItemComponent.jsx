@@ -56,7 +56,7 @@ class ItemComponent extends React.Component {
         let url = this.parseURL(itemLink);
 
         return (
-            <div>
+            <div class="row">
                 {itemNo}. <UpvoteComponent upvoteAction={this.upvoteAction}/>
                 <a href={itemLink}>{itemTitle}</a> ({url.hostname})
                 <SummaryComponent item={item}
