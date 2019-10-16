@@ -47,7 +47,7 @@ class ItemListComponent extends React.Component {
         }
 
         return (
-            <div>
+            <div class="container">
                 <InfiniteScroll
                     dataLength={newsItems.length} //This is important field to render the next data
                     next={this.loadItems}
