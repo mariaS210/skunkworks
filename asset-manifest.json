@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/skunkworks/static/css/main.623d2a7e.chunk.css",
+    "main.js": "/skunkworks/static/js/main.de88c503.chunk.js",
+    "main.js.map": "/skunkworks/static/js/main.de88c503.chunk.js.map",
+    "runtime~main.js": "/skunkworks/static/js/runtime~main.0edc9c1e.js",
+    "runtime~main.js.map": "/skunkworks/static/js/runtime~main.0edc9c1e.js.map",
+    "static/css/2.266e55a5.chunk.css": "/skunkworks/static/css/2.266e55a5.chunk.css",
+    "static/js/2.c3920b99.chunk.js": "/skunkworks/static/js/2.c3920b99.chunk.js",
+    "static/js/2.c3920b99.chunk.js.map": "/skunkworks/static/js/2.c3920b99.chunk.js.map",
+    "index.html": "/skunkworks/index.html",
+    "precache-manifest.077679fd72474694e865513fc8b8a477.js": "/skunkworks/precache-manifest.077679fd72474694e865513fc8b8a477.js",
+    "service-worker.js": "/skunkworks/service-worker.js",
+    "static/css/2.266e55a5.chunk.css.map": "/skunkworks/static/css/2.266e55a5.chunk.css.map",
+    "static/css/main.623d2a7e.chunk.css.map": "/skunkworks/static/css/main.623d2a7e.chunk.css.map"
+  }
+}
