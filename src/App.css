@@ -8,6 +8,11 @@
   pointer-events: none;
 }
 
+.item {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
 .Upvote {
   font-size: 10pt;
   display: inline-block;
