@@ -1,7 +1,7 @@
 {
   "name": "skunkworks",
   "version": "0.1.0",
-  "homepage" : "https://marias210.github.io/skunkworks",
+  "homepage": "https://marias210.github.io/skunkworks",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
