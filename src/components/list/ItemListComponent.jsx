@@ -21,7 +21,7 @@ class ItemListComponent extends React.Component {
     }
 
     loadItems = () => {
-        let endpoint = this.props && this.props.endpoint || "topstories"
+        let endpoint = (this.props && this.props.endpoint) || "topstories";
         ApiEndpoints.getNewsItems(response => this.setState({
             items: response
         }), endpoint

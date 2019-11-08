@@ -27,9 +27,9 @@ function App() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/top">Top</Nav.Link>
-          <Nav.Link href="/new">New</Nav.Link>
-          <Nav.Link href="/best">Best</Nav.Link>
+          <Nav.Link href="/skunkworks/top">Top</Nav.Link>
+          <Nav.Link href="/skunkworks/new">New</Nav.Link>
+          <Nav.Link href="/skunkworks/best">Best</Nav.Link>
           <NavDropdown title="More" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Top</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">New</NavDropdown.Item>
@@ -47,17 +47,17 @@ function App() {
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/top">
+          <Route path="/skunkworks/top">
             <ItemListComponent endpoint="topstories"/>
           </Route>
-          <Route path="/new">
+          <Route path="/skunkworks/new">
             <ItemListComponent endpoint="newstories"/>
           </Route>
-          <Route path="/best">
+          <Route path="/skunkworks/best">
             <ItemListComponent endpoint="beststories"/>
           </Route>
-          <Route path="/">
-            <Redirect to="/top"></Redirect>
+          <Route path="/skunkworks">
+            <Redirect to="/skunkworks/top"></Redirect>
           </Route>
         </Switch>
     </Router>
