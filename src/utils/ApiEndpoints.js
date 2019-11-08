@@ -21,13 +21,13 @@ class ApiEndpoints {
             });
     }
 
-    static getNewsItems(callback) {
+    static getNewsItems(callback, endpoint="topstories") {
         if (newsItems.length > 0) {
             cursor = cursor + limitCounter;
             let result = newsItems.slice(0, cursor);
             return callback(result);
         }
-        let request = new Request(`${BASE_URL}/v0/topstories.json`);
+        let request = new Request(`${BASE_URL}/v0/${endpoint}.json`);
         fetch(request)
             .then(response => {
                 if (response.status === 200) {

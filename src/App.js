@@ -10,19 +10,27 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <Router className="App">
       <Navbar bg="light" expand="lg" sticky="top">
       <Navbar.Brand href="#home">HackerNews</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#link">Link</Nav.Link>
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+          <Nav.Link href="/top">Top</Nav.Link>
+          <Nav.Link href="/new">New</Nav.Link>
+          <Nav.Link href="/best">Best</Nav.Link>
+          <NavDropdown title="More" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Top</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">New</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">Controversial</NavDropdown.Item>
@@ -36,8 +44,26 @@ function App() {
         </Form>
       </Navbar.Collapse>
       </Navbar>
-      <ItemListComponent/>
-    </div>
+      {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/top">
+            <ItemListComponent endpoint="topstories"/>
+          </Route>
+          <Route path="/new">
+            <ItemListComponent endpoint="newstories"/>
+          </Route>
+          <Route path="/best">
+            <ItemListComponent endpoint="beststories"/>
+          </Route>
+          <Route path="/best">
+            <ItemListComponent endpoint="beststories"/>
+          </Route>
+          <Route path="/">
+            <Redirect to="/top"></Redirect>
+          </Route>
+        </Switch>
+    </Router>
   );
 }
 
