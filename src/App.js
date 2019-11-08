@@ -56,9 +56,6 @@ function App() {
           <Route path="/best">
             <ItemListComponent endpoint="beststories"/>
           </Route>
-          <Route path="/best">
-            <ItemListComponent endpoint="beststories"/>
-          </Route>
           <Route path="/">
             <Redirect to="/top"></Redirect>
           </Route>
