@@ -21,8 +21,8 @@ class ApiEndpoints {
             });
     }
 
-    static getNewsItems(callback, endpoint="topstories") {
-        if (newsItems.length > 0) {
+    static getNewsItems(callback, endpoint="topstories", forceMakeRequest=false) {
+        if (newsItems.length > 0 && !forceMakeRequest) {
             cursor = cursor + limitCounter;
             let result = newsItems.slice(0, cursor);
             return callback(result);

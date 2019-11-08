@@ -10,9 +10,10 @@ class ItemListComponent extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            endpoint: this.props.endpoint,
             items: null,
             isLoading: false,
-            openedStory: 0
+            openedStory: 0,
         };
     }
 
@@ -21,10 +22,10 @@ class ItemListComponent extends React.Component {
     }
 
     loadItems = () => {
-        let endpoint = (this.props && this.props.endpoint) || "topstories";
+        let endpoint = (this.state && this.state.endpoint) || "beststories";
         ApiEndpoints.getNewsItems(response => this.setState({
             items: response
-        }), endpoint
+        }), endpoint, true
         );
     }
 
