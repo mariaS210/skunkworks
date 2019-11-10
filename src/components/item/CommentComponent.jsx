@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ListGroup from 'react-bootstrap/ListGroup';
+
 import ApiEndpoints from '../../utils/ApiEndpoints';
 
 function htmlDecode(input)
@@ -34,16 +36,19 @@ class CommentComponent extends React.Component {
         let index = 1;
         if (comments.length > 0) {
             return (
-                <div>
+                <ListGroup variant="flush">
                     Comments
                     {comments.map(function(comment) {
                         if (!comment.deleted) {
-                            return <p key={comment.id}>{index++}. {htmlDecode(comment.text)}</p>;
+                            return (<ListGroup.Item>
+                                    <p key={comment.id}>{htmlDecode(comment.text)}</p>
+                                    <p><i>{(comment.kids && comment.kids.length) || 0} children</i></p>
+                                </ListGroup.Item>);
                         } else {
                             return <div><i>Deleted.</i></div>
                         }
                     })}
-                </div>
+                </ListGroup>
             );
         } else {
             return <div><i>Stand by.</i></div>;
