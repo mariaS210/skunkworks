@@ -10,6 +10,7 @@ class ItemListComponent extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            searchTerm: this.props.searchTerm,
             endpoint: this.props.endpoint,
             items: null,
             isLoading: false,
@@ -64,6 +65,7 @@ class ItemListComponent extends React.Component {
                         <ItemComponent key={index}
                             index={index}
                             itemId={item}
+                            searchTerm={this.state.searchTerm}
                             changeOpenedStory={this.changeOpenedStory}
                             openedStory={this.state.openedStory} />
                     ))}

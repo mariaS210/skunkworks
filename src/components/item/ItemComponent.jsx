@@ -11,7 +11,8 @@ class ItemComponent extends React.Component {
         this.state = {
             item: null,
             index: this.props.index,
-            score: 0
+            score: 0,
+            searchTerm: this.props.searchTerm,
         };
     }
 
@@ -50,21 +51,30 @@ class ItemComponent extends React.Component {
         let item = this.state.item;
         let itemNo = this.state.index;
         let itemTitle = " " + (item && item.title);
-        let itemLink = item && item.url;
+        let itemLink = "" + (item && item.url);
         let score = this.buildScore();
         
         let url = this.parseURL(itemLink);
-
-        return (
-            <div className="item">
-                {itemNo}. <UpvoteComponent upvoteAction={this.upvoteAction}/>
-                <a href={itemLink}>{itemTitle}</a> ({url.hostname})
-                <SummaryComponent item={item}
-                                  score={score}
-                                  changeOpenedStory={this.props.changeOpenedStory}
-                                  openedStory={this.props.openedStory}/>
-            </div>
-        )
+        let term = this.state.searchTerm
+        let shouldDisplay = (term && (
+            itemTitle.includes(term) ||
+            itemLink.includes(term)
+        )) || !term;
+        if (!shouldDisplay) {
+            return (null);
+        }
+        else {
+            return (
+                <div className="item">
+                    {itemNo}. <UpvoteComponent upvoteAction={this.upvoteAction}/>
+                    <a href={itemLink}>{itemTitle}</a> ({url.hostname})
+                    <SummaryComponent item={item}
+                                    score={score}
+                                    changeOpenedStory={this.props.changeOpenedStory}
+                                    openedStory={this.props.openedStory}/>
+                </div>
+            );
+        }
     }
 }
 
