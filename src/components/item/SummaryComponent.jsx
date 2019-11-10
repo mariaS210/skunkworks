@@ -1,5 +1,6 @@
 import React from 'react';
 import CommentComponent from './CommentComponent';
+import UpvoteComponent from './UpvoteComponent'
 
 
 class SummaryComponent extends React.Component {
@@ -20,7 +21,7 @@ class SummaryComponent extends React.Component {
     render() {
       if (this.props && this.props.item) {
         let author = this.props.item.by;
-        let points = this.props.score;
+        let points = " " + this.props.score;
         let time = this.props.item.time;
         let comments = this.props.item.kids ? this.props.item.kids.length : 0;
         let postDate = new Date(time * 1000);
@@ -33,6 +34,7 @@ class SummaryComponent extends React.Component {
         let shouldRenderComments = (this.props.openedStory === this.props.item.id)//this.state.showComments;
 
          return (<div>
+          <UpvoteComponent upvoteAction={this.props.upvoteAction}/>
           {points} points by {author} |
           {Math.floor(timeDiff)} {timeUnit} ago |
           <span className="Comment" onClick={() => {

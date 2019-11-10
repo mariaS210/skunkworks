@@ -2,6 +2,12 @@ import React from 'react';
 
 import ApiEndpoints from '../../utils/ApiEndpoints';
 
+function htmlDecode(input)
+{
+    var doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent;
+}
+
 class CommentComponent extends React.Component {
 
     constructor(props) {
@@ -32,7 +38,7 @@ class CommentComponent extends React.Component {
                     Comments
                     {comments.map(function(comment) {
                         if (!comment.deleted) {
-                            return <p key={comment.id}>{index++}. {comment.text}</p>;
+                            return <p key={comment.id}>{index++}. {htmlDecode(comment.text)}</p>;
                         } else {
                             return <div><i>Deleted.</i></div>
                         }
@@ -40,7 +46,7 @@ class CommentComponent extends React.Component {
                 </div>
             );
         } else {
-            return <div><i>No comments.</i></div>;
+            return <div><i>Stand by.</i></div>;
         }
     }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 
-import UpvoteComponent from './UpvoteComponent'
 import SummaryComponent from './SummaryComponent';
 
 import ApiEndpoints from '../../utils/ApiEndpoints';
@@ -69,14 +68,17 @@ class ItemComponent extends React.Component {
             return (
                 <div>
                     <Card border="light">
-                        <Card.Title><UpvoteComponent upvoteAction={this.upvoteAction}/> 
-                        <a href={itemLink}>{itemTitle}</a> ({url.hostname})</Card.Title>
-                        <Card.Text>
-                        <SummaryComponent item={item}
-                                        score={score}
-                                        changeOpenedStory={this.props.changeOpenedStory}
-                                        openedStory={this.props.openedStory}/>
-                        </Card.Text>
+                        <Card.Body>
+                            <Card.Title><a href={itemLink}>{itemTitle}</a> ({url.hostname})</Card.Title>
+                            <Card.Text>
+                            
+                            <SummaryComponent item={item}
+                                              score={score}
+                                              changeOpenedStory={this.props.changeOpenedStory}
+                                              openedStory={this.props.openedStory}
+                                              upvoteAction={this.upvoteAction}/>
+                            </Card.Text>
+                        </Card.Body>
                     </Card>
                     <br/>
                 </div>

@@ -4,10 +4,10 @@ import React from 'react';
 // order matters.
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 import {
   HashRouter as Router,
@@ -48,7 +48,7 @@ class App extends React.Component {
       <Router className="App">
         <Navbar bg="light" expand="lg" sticky="top">
         <Navbar.Brand as={Link} to="/top" className="btn btn-outline-warning">
-          <FontAwesomeIcon icon={["fab", "hacker-news-square"]}/>
+          <FontAwesomeIcon icon={["fab", "hacker-news-square"]}/> Hacker News
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
