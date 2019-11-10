@@ -51,14 +51,15 @@ class ItemComponent extends React.Component {
         let item = this.state.item;
         let itemNo = this.state.index;
         let itemTitle = " " + (item && item.title);
-        let itemLink = "" + (item && item.url);
+        let itemLink = (item && item.url);
         let score = this.buildScore();
         
         let url = this.parseURL(itemLink);
-        let term = this.state.searchTerm
+        let term = this.props.searchTerm && this.props.searchTerm.toLowerCase()
         let shouldDisplay = (term && (
-            itemTitle.includes(term) ||
-            itemLink.includes(term)
+            itemTitle.toLowerCase().includes(term) ||
+            ("" + itemLink).toLowerCase().includes(term) ||
+            ((item && item.author) || "").toLowerCase().includes(term)
         )) || !term;
         if (!shouldDisplay) {
             return (null);

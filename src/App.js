@@ -19,7 +19,7 @@ import './App.css';
 import TopStoriesComponent from './components/list/TopStoriesComponent';
 import BestStoriesComponent from './components/list/BestStoriesComponent';
 import NewStoriesComponent from './components/list/NewStoriesComponent';
-import SearchListComponent from './components/list/SearchListComponent';
+
 
 class App extends React.Component {
 
@@ -27,6 +27,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       term: "",
+      endpoint: "topstories",
     }
   }
 
@@ -42,9 +43,9 @@ class App extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/top" className="nav-link">Top</Link>
-            <Link to="/new" className="nav-link">New</Link>
-            <Link to="/best" className="nav-link">Best</Link>
+            <Link to="/top" onClick={() => {this.setState({endpoint: "topstories"})}} className="nav-link">Top</Link>
+            <Link to="/new" onClick={() => {this.setState({endpoint: "newstories"})}} className="nav-link">New</Link>
+            <Link to="/best" onClick={() => {this.setState({endpoint: "beststories"})}} className="nav-link">Best</Link>
           </Nav>
           <Form inline>
             <FormControl
@@ -64,10 +65,9 @@ class App extends React.Component {
         </Navbar.Collapse>
         </Navbar>
           <Switch>
-            <Route exact path="/top"  component={TopStoriesComponent} />
-            <Route exact path="/new"  component={NewStoriesComponent} />
-            <Route exact path="/best" component={BestStoriesComponent} />
-            <Route exact path="/search/:term" render={(props) => <SearchListComponent {...props} searchTerm={this.state.term} />} />
+            <Route exact path="/top"  render={(props) => <TopStoriesComponent {...props} searchTerm={this.state.term} />} />
+            <Route exact path="/new"  render={(props) => <NewStoriesComponent {...props} searchTerm={this.state.term} />} />
+            <Route exact path="/best" render={(props) => <BestStoriesComponent {...props} searchTerm={this.state.term} />} />
             <Route exact path="/" component={TopStoriesComponent} />
           </Switch>
       </Router>
