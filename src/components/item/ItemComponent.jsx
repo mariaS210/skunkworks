@@ -67,18 +67,13 @@ class ItemComponent extends React.Component {
         else {
             return (
                 <div>
-                    <Card border="light">
-                        <Card.Body>
-                            <Card.Title><a href={itemLink}>{itemTitle}</a> ({url.hostname})</Card.Title>
-                            <Card.Text>
-                            
-                            <SummaryComponent item={item}
-                                              score={score}
-                                              changeOpenedStory={this.props.changeOpenedStory}
-                                              openedStory={this.props.openedStory}
-                                              upvoteAction={this.upvoteAction}/>
-                            </Card.Text>
-                        </Card.Body>
+                    <Card border="light" body>
+                        <div className="item"><a href={itemLink}>{itemTitle}</a> ({url.hostname})</div>
+                        <SummaryComponent item={item}
+                                            score={score}
+                                            changeOpenedStory={this.props.changeOpenedStory}
+                                            openedStory={this.props.openedStory}
+                                            upvoteAction={this.upvoteAction}/>
                     </Card>
                     <br/>
                 </div>

@@ -33,7 +33,6 @@ class CommentComponent extends React.Component {
 
     render() {
         let comments = this.state.comments;
-        let index = 1;
         if (comments.length > 0) {
             return (
                 <ListGroup variant="flush">
@@ -41,8 +40,8 @@ class CommentComponent extends React.Component {
                     {comments.map(function(comment) {
                         if (!comment.deleted) {
                             return (<ListGroup.Item>
-                                    <p key={comment.id}>{htmlDecode(comment.text)}</p>
-                                    <p><i>{(comment.kids && comment.kids.length) || 0} children</i></p>
+                                    <div key={comment.id}>{htmlDecode(comment.text)}</div>
+                                    <div><i>{(comment.kids && comment.kids.length) || 0} children</i></div>
                                 </ListGroup.Item>);
                         } else {
                             return <div><i>Deleted.</i></div>
