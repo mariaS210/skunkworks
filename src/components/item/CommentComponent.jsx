@@ -39,12 +39,12 @@ class CommentComponent extends React.Component {
                     Comments
                     {comments.map(function(comment) {
                         if (!comment.deleted) {
-                            return (<ListGroup.Item>
+                            return (<ListGroup.Item key={"itm-" + comment.id}>
                                     <div key={comment.id}>{htmlDecode(comment.text)}</div>
-                                    <div><i>{(comment.kids && comment.kids.length) || 0} children</i></div>
+                                    <div><i>{(comment.kids && comment.kids.length) || "no"} replies</i></div>
                                 </ListGroup.Item>);
                         } else {
-                            return <div><i>Deleted.</i></div>
+                            return <div key={comment.id}><i>Deleted.</i></div>
                         }
                     })}
                 </ListGroup>
