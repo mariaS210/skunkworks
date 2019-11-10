@@ -4,9 +4,10 @@ import React from 'react';
 // order matters.
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
 
 import {
   HashRouter as Router,
@@ -15,10 +16,17 @@ import {
   Link
 } from "react-router-dom";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core'
+
 import './App.css';
 import TopStoriesComponent from './components/list/TopStoriesComponent';
 import BestStoriesComponent from './components/list/BestStoriesComponent';
 import NewStoriesComponent from './components/list/NewStoriesComponent';
+
+library.add(faFilter, faThumbsUp, fab);
 
 
 class App extends React.Component {
@@ -39,7 +47,9 @@ class App extends React.Component {
     return (
       <Router className="App">
         <Navbar bg="light" expand="lg" sticky="top">
-        <Navbar.Brand href="#home">HackerNews</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/top" className="btn btn-outline-warning">
+          <FontAwesomeIcon icon={["fab", "hacker-news-square"]}/>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -48,19 +58,16 @@ class App extends React.Component {
             <Link to="/best" onClick={() => {this.setState({endpoint: "beststories"})}} className="nav-link">Best</Link>
           </Nav>
           <Form inline>
+          <InputGroup className="mr-sm-2">
+            <Button as={InputGroup.Prepend} variant="primary"><FontAwesomeIcon icon="filter" /></Button>
             <FormControl
               type="text"
-              placeholder="Search"
-              className="mr-sm-2"
+              placeholder="Filter"              
               value={this.state.term}
               onChange={this.handleChange.bind(this)}
-            />
-            <Button
-              variant="outline-success"
-              as={Link}
-              to={`/search/${this.state.term}`}>
-                Search
-            </Button>
+              aria-describedby="filter"
+            ></FormControl>
+          </InputGroup>
           </Form>
         </Navbar.Collapse>
         </Navbar>

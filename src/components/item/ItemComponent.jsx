@@ -1,4 +1,6 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
+
 import UpvoteComponent from './UpvoteComponent'
 import SummaryComponent from './SummaryComponent';
 
@@ -49,7 +51,6 @@ class ItemComponent extends React.Component {
 
     render() {
         let item = this.state.item;
-        let itemNo = this.state.index;
         let itemTitle = " " + (item && item.title);
         let itemLink = (item && item.url);
         let score = this.buildScore();
@@ -66,13 +67,18 @@ class ItemComponent extends React.Component {
         }
         else {
             return (
-                <div className="item">
-                    {itemNo}. <UpvoteComponent upvoteAction={this.upvoteAction}/>
-                    <a href={itemLink}>{itemTitle}</a> ({url.hostname})
-                    <SummaryComponent item={item}
-                                    score={score}
-                                    changeOpenedStory={this.props.changeOpenedStory}
-                                    openedStory={this.props.openedStory}/>
+                <div>
+                    <Card border="light">
+                        <Card.Title><UpvoteComponent upvoteAction={this.upvoteAction}/> 
+                        <a href={itemLink}>{itemTitle}</a> ({url.hostname})</Card.Title>
+                        <Card.Text>
+                        <SummaryComponent item={item}
+                                        score={score}
+                                        changeOpenedStory={this.props.changeOpenedStory}
+                                        openedStory={this.props.openedStory}/>
+                        </Card.Text>
+                    </Card>
+                    <br/>
                 </div>
             );
         }
