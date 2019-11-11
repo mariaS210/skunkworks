@@ -3,6 +3,7 @@ let cursor = 0;
 let limitCounter = 30;
 let newsItems = []
 
+
 class ApiEndpoints {
     static getNewsItem(itemId, callback) {
         let request = new Request(`${BASE_URL}/v0/item/${itemId}.json`);

@@ -3,19 +3,19 @@ import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import ApiEndpoints from '../../utils/ApiEndpoints';
+import htmlDecode from '../../utils/helpers';
+import CommentListComponent from '../list/CommentListComponent';
 
-function htmlDecode(input)
-{
-    var doc = new DOMParser().parseFromString(input, "text/html");
-    return doc.documentElement.textContent;
-}
+
 
 class CommentComponent extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            comments: []
+            comments: [],
+            kids: [],
+            expanded: false,
         }
     }
 
@@ -33,15 +33,16 @@ class CommentComponent extends React.Component {
 
     render() {
         let comments = this.state.comments;
+        let depth = (this.props.depth || 0) + 1;
         if (comments.length > 0) {
             return (
                 <ListGroup variant="flush">
                     Comments
-                    {comments.map(function(comment) {
+                    {comments.map((comment) => {
                         if (!comment.deleted) {
                             return (<ListGroup.Item key={"itm-" + comment.id}>
                                     <div key={comment.id}>{htmlDecode(comment.text)}</div>
-                                    <div><i>{(comment.kids && comment.kids.length) || "no"} replies</i></div>
+                                    <CommentListComponent kids={comment.kids} depth={depth}/>
                                 </ListGroup.Item>);
                         } else {
                             return <div key={comment.id}><i>Deleted.</i></div>
