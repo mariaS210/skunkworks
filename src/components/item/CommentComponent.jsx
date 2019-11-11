@@ -9,6 +9,7 @@ import CommentListComponent from '../list/CommentListComponent';
 
 
 class CommentComponent extends React.Component {
+    _isMounted = false;
 
     constructor(props) {
         super(props);
@@ -20,15 +21,22 @@ class CommentComponent extends React.Component {
     }
 
     updateComments = (newComments) => {
-        this.setState({
-            comments: newComments
-        });
+        if (this._isMounted) {
+            this.setState({
+                comments: newComments
+            });
+        }
     }
 
     componentDidMount() {
+        this._isMounted = true;
         let item = this.props.item;
         let kids = item && item.kids;
         ApiEndpoints.getBulkNewsItems(kids, this.updateComments);
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {

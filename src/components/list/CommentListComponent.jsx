@@ -9,6 +9,8 @@ import htmlDecode from '../../utils/helpers';
 const MAX_COMMENT_DEPTH = 5;
 
 class CommentListComponent extends React.Component {
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -19,21 +21,33 @@ class CommentListComponent extends React.Component {
 
     updateExpanded = () => {
         let oldExpanded = this.state.expanded;
-        this.setState({
-            expanded: !oldExpanded,
-            replies: !oldExpanded ? this.state.replies : []
-        });
+        if (this._isMounted) {
+            this.setState({
+                expanded: !oldExpanded,
+                replies: !oldExpanded ? this.state.replies : []
+            });
+        }
     }
 
     updateReplies = (newReplies) => {
-        this.setState({
-            replies: newReplies
-        })
+        if (this._isMounted) {
+            this.setState({
+                replies: newReplies
+            })
+        }
     }
 
     fetchReplies = () => {
         ApiEndpoints.getBulkNewsItems(this.props.kids, this.updateReplies);
-    } 
+    }
+    
+    componentDidMount() {
+        this._isMounted = true;
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
 
     render() {
         // quick no displays
