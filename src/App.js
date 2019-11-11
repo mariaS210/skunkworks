@@ -17,7 +17,7 @@ import {
 } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faThumbsUp, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -26,7 +26,7 @@ import TopStoriesComponent from './components/list/TopStoriesComponent';
 import BestStoriesComponent from './components/list/BestStoriesComponent';
 import NewStoriesComponent from './components/list/NewStoriesComponent';
 
-library.add(faFilter, faThumbsUp, fab);
+library.add(faFilter, faThumbsUp, faAngleDown, faAngleUp, fab);
 
 
 class App extends React.Component {
