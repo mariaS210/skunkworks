@@ -39,7 +39,7 @@ class ItemComponent extends React.Component {
         let itemLink = (item && item.url);
         let score = item && item.score;
         
-        let url = this.parseURL(itemLink);
+        let hostname = "(" + this.parseURL(itemLink).hostname + ")";
         let term = this.props.searchTerm && this.props.searchTerm.toLowerCase()
         let shouldDisplay = (term && (
             itemTitle.toLowerCase().includes(term) ||
@@ -50,10 +50,11 @@ class ItemComponent extends React.Component {
             return (null);
         }
         else {
+            let title = itemLink ? (<a href={itemLink}>{itemTitle}</a>) : itemTitle;
             return (
                 <div>
                     <Card border="light" body>
-                        <div className="item"><a href={itemLink}>{itemTitle}</a> ({url.hostname})</div>
+            <div className="item">{title} {itemLink && hostname}</div>
                         <SummaryComponent item={item}
                                           score={score}
                                           changeOpenedStory={this.props.changeOpenedStory}

@@ -20,6 +20,7 @@ class SummaryComponent extends React.Component {
 
     render() {
       if (this.props && this.props.item) {
+        let itemLink = this.props.item.url;
         let author = this.props.item.by;
         let points = " " + this.props.score;
         let time = this.props.item.time;
@@ -34,9 +35,9 @@ class SummaryComponent extends React.Component {
         let shouldRenderComments = (this.props.openedStory === this.props.item.id);
 
          return (<div>
-          <div className="btn btn-outline-warning" onClick={() => {this.props.bookmarkAction(this.props.item)}}>
-              <FontAwesomeIcon icon="bookmark" />
-          </div>
+          {itemLink && <div className="btn btn-outline-warning" onClick={() => {this.props.bookmarkAction(this.props.item)}}>
+            <FontAwesomeIcon icon="bookmark" />
+            </div>}
           {points} points by {author} |
           {Math.floor(timeDiff)} {timeUnit} ago |
           <span className="Comment" onClick={() => {

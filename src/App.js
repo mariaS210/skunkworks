@@ -4,6 +4,7 @@ import React from 'react';
 // order matters.
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
@@ -22,10 +23,9 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import './App.css';
-import TopStoriesComponent from './components/list/TopStoriesComponent';
-import BestStoriesComponent from './components/list/BestStoriesComponent';
-import NewStoriesComponent from './components/list/NewStoriesComponent';
+import ItemListComponent from './components/list/ItemListComponent';
 import BookmarkListComponent from './components/list/BookmarkListComponent';
+
 
 library.add(faFilter, faBookmark, faAngleDown, faAngleUp, fab);
 
@@ -68,9 +68,14 @@ class App extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/top" onClick={() => {this.setState({endpoint: "topstories"})}} className="nav-link">Top</Link>
-            <Link to="/new" onClick={() => {this.setState({endpoint: "newstories"})}} className="nav-link">New</Link>
-            <Link to="/best" onClick={() => {this.setState({endpoint: "beststories"})}} className="nav-link">Best</Link>
+            <Link to="/top" className="nav-link">Top</Link>
+            <Link to="/new" className="nav-link">New</Link>
+            <Link to="/best" className="nav-link">Best</Link>
+            <NavDropdown title="More" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/ask">Ask</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/show">Show</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/job">Job</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
           <Form inline>
           <InputGroup className="mr-sm-2">
@@ -88,10 +93,35 @@ class App extends React.Component {
         {bookmarks && <BookmarkListComponent bookmarks={bookmarks}/>}
         </Navbar>
           <Switch>
-            <Route exact path="/top"  render={(props) => <TopStoriesComponent searchTerm={this.state.term} bookmarkAction={this.bookmarkAction}/>} />
-            <Route exact path="/new"  render={(props) => <NewStoriesComponent searchTerm={this.state.term} bookmarkAction={this.bookmarkAction}/>} />
-            <Route exact path="/best" render={(props) => <BestStoriesComponent searchTerm={this.state.term} bookmarkAction={this.bookmarkAction}/>} />
-            <Route exact path="/" render={(props) => <TopStoriesComponent searchTerm={this.state.term} bookmarkAction={this.bookmarkAction}/>} />
+            <Route exact path="/top"
+                   render={(props) => <ItemListComponent endpoint="topstories" key="topstories"
+                                                         searchTerm={this.state.term}
+                                                         bookmarkAction={this.bookmarkAction}/>} />
+            <Route exact path="/new"
+                   render={(props) => <ItemListComponent endpoint="newstories" key="newstories"
+                                                         searchTerm={this.state.term}
+                                                         bookmarkAction={this.bookmarkAction}/>} />
+            <Route exact path="/best"
+                   render={(props) => <ItemListComponent endpoint="beststories" key="beststories"
+                                                         searchTerm={this.state.term}
+                                                         bookmarkAction={this.bookmarkAction}/>} />
+            <Route exact path="/ask"
+                   render={(props) => <ItemListComponent endpoint="askstories" key="askstories"
+                                                         searchTerm={this.state.term}
+                                                         bookmarkAction={this.bookmarkAction}/>} />
+            <Route exact path="/show"
+                   render={(props) => <ItemListComponent endpoint="showstories" key="showstories"
+                                                         searchTerm={this.state.term}
+                                                         bookmarkAction={this.bookmarkAction}/>} />
+
+            <Route exact path="/job"
+                   render={(props) => <ItemListComponent endpoint="jobstories" key="jobstories"
+                                                         searchTerm={this.state.term}
+                                                         bookmarkAction={this.bookmarkAction}/>} />
+            <Route exact path="/"
+                   render={(props) => <ItemListComponent endpoint="topstories"  key="home"
+                                                         searchTerm={this.state.term}
+                                                         bookmarkAction={this.bookmarkAction}/>} />
           </Switch>
       </Router>
     );
