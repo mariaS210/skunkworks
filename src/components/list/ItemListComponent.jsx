@@ -14,6 +14,7 @@ class ItemListComponent extends React.Component {
             items: null,
             isLoading: false,
             openedStory: 0,
+            bookmarks: [],
         };
     }
 
@@ -67,7 +68,8 @@ class ItemListComponent extends React.Component {
                             itemId={item}
                             searchTerm={this.props.searchTerm}
                             changeOpenedStory={this.changeOpenedStory}
-                            openedStory={this.state.openedStory} />
+                            openedStory={this.state.openedStory}
+                            bookmarkAction={this.props.bookmarkAction}/>
                     ))}
                 </InfiniteScroll>
             </div>

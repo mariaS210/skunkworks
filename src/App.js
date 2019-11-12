@@ -17,7 +17,7 @@ import {
 } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter, faThumbsUp, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faBookmark, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -25,8 +25,9 @@ import './App.css';
 import TopStoriesComponent from './components/list/TopStoriesComponent';
 import BestStoriesComponent from './components/list/BestStoriesComponent';
 import NewStoriesComponent from './components/list/NewStoriesComponent';
+import BookmarkListComponent from './components/list/BookmarkListComponent';
 
-library.add(faFilter, faThumbsUp, faAngleDown, faAngleUp, fab);
+library.add(faFilter, faBookmark, faAngleDown, faAngleUp, fab);
 
 
 class App extends React.Component {
@@ -36,6 +37,7 @@ class App extends React.Component {
     this.state = {
       term: "",
       endpoint: "topstories",
+      bookmarks: [],
     }
   }
 
@@ -43,7 +45,20 @@ class App extends React.Component {
     this.setState({term: event.target.value})
   }
 
+
+  bookmarkAction = (item) => {
+    if (item && item.url) {
+        let existingBookmarks = this.state.bookmarks;
+        if (! existingBookmarks.find((saved) => {return saved.url === item.url})) {
+            this.setState({
+                bookmarks: [...this.state.bookmarks, item],
+            });
+        }
+    }
+  }
+
   render() {
+    let bookmarks = this.state.bookmarks;
     return (
       <Router className="App">
         <Navbar bg="light" expand="lg" sticky="top">
@@ -70,12 +85,13 @@ class App extends React.Component {
           </InputGroup>
           </Form>
         </Navbar.Collapse>
+        {bookmarks && <BookmarkListComponent bookmarks={bookmarks}/>}
         </Navbar>
           <Switch>
-            <Route exact path="/top"  render={(props) => <TopStoriesComponent {...props} searchTerm={this.state.term} />} />
-            <Route exact path="/new"  render={(props) => <NewStoriesComponent {...props} searchTerm={this.state.term} />} />
-            <Route exact path="/best" render={(props) => <BestStoriesComponent {...props} searchTerm={this.state.term} />} />
-            <Route exact path="/" component={TopStoriesComponent} />
+            <Route exact path="/top"  render={(props) => <TopStoriesComponent searchTerm={this.state.term} bookmarkAction={this.bookmarkAction}/>} />
+            <Route exact path="/new"  render={(props) => <NewStoriesComponent searchTerm={this.state.term} bookmarkAction={this.bookmarkAction}/>} />
+            <Route exact path="/best" render={(props) => <BestStoriesComponent searchTerm={this.state.term} bookmarkAction={this.bookmarkAction}/>} />
+            <Route exact path="/" render={(props) => <TopStoriesComponent searchTerm={this.state.term} bookmarkAction={this.bookmarkAction}/>} />
           </Switch>
       </Router>
     );

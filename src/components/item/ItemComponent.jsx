@@ -12,16 +12,8 @@ class ItemComponent extends React.Component {
         this.state = {
             item: null,
             index: this.props.index,
-            score: 0,
             searchTerm: this.props.searchTerm,
         };
-    }
-
-    upvoteAction = () => {
-        let score = this.state && this.state.score;
-        this.setState({
-            score: score + 1
-        });
     }
 
     componentDidMount() {
@@ -31,13 +23,6 @@ class ItemComponent extends React.Component {
                     item: response
                 })
         );
-    }
-
-    buildScore = () => {
-        let localScore = this.state && this.state.score;
-        let hckrScore = this.state.item && this.state.item.score;
-        let score = hckrScore + localScore;
-        return score;
     }
 
     parseURL = (itemLink) => {
@@ -52,7 +37,7 @@ class ItemComponent extends React.Component {
         let item = this.state.item;
         let itemTitle = " " + (item && item.title);
         let itemLink = (item && item.url);
-        let score = this.buildScore();
+        let score = item && item.score;
         
         let url = this.parseURL(itemLink);
         let term = this.props.searchTerm && this.props.searchTerm.toLowerCase()
@@ -70,10 +55,10 @@ class ItemComponent extends React.Component {
                     <Card border="light" body>
                         <div className="item"><a href={itemLink}>{itemTitle}</a> ({url.hostname})</div>
                         <SummaryComponent item={item}
-                                            score={score}
-                                            changeOpenedStory={this.props.changeOpenedStory}
-                                            openedStory={this.props.openedStory}
-                                            upvoteAction={this.upvoteAction}/>
+                                          score={score}
+                                          changeOpenedStory={this.props.changeOpenedStory}
+                                          openedStory={this.props.openedStory}
+                                          bookmarkAction={this.props.bookmarkAction}/>
                     </Card>
                     <br/>
                 </div>

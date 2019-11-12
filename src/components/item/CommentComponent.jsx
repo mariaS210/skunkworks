@@ -45,7 +45,6 @@ class CommentComponent extends React.Component {
         if (comments.length > 0) {
             return (
                 <ListGroup variant="flush">
-                    Comments
                     {comments.map((comment) => {
                         if (!comment.deleted) {
                             return (<ListGroup.Item key={"itm-" + comment.id}>

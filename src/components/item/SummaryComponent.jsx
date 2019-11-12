@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentComponent from './CommentComponent';
-import UpvoteComponent from './UpvoteComponent'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class SummaryComponent extends React.Component {
@@ -26,15 +26,17 @@ class SummaryComponent extends React.Component {
         let comments = this.props.item.kids ? this.props.item.kids.length : 0;
         let postDate = new Date(time * 1000);
         let timeDiff = Math.abs(Date.now() - postDate) / 36e5; // in hours
-        let timeUnit = "hours"
+        let timeUnit = "hours";
         if (timeDiff > 24) {
           timeUnit = "days";
           timeDiff /=24;
         }
-        let shouldRenderComments = (this.props.openedStory === this.props.item.id)//this.state.showComments;
+        let shouldRenderComments = (this.props.openedStory === this.props.item.id);
 
          return (<div>
-          <UpvoteComponent upvoteAction={this.props.upvoteAction}/>
+          <div className="btn btn-outline-warning" onClick={() => {this.props.bookmarkAction(this.props.item)}}>
+              <FontAwesomeIcon icon="bookmark" />
+          </div>
           {points} points by {author} |
           {Math.floor(timeDiff)} {timeUnit} ago |
           <span className="Comment" onClick={() => {
