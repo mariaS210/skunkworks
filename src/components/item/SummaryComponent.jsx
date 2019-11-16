@@ -1,6 +1,8 @@
 import React from 'react';
-import CommentComponent from './CommentComponent';
+import CommentListComponent from '../list/CommentListComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const ROOT_DEPTH = 0;
 
 
 class SummaryComponent extends React.Component {
@@ -42,7 +44,11 @@ class SummaryComponent extends React.Component {
           {Math.floor(timeDiff)} {timeUnit} ago |
           <span className="Comment" onClick={() => {
             this.props.changeOpenedStory(this.props.item.id);}}>{comments} comments</span>
-          {shouldRenderComments && <CommentComponent key={this.props.item.id} item={this.props.item}/>}
+          {shouldRenderComments && <CommentListComponent key={this.props.item.id}
+                                                         kids={this.props.item.kids}
+                                                         depth={ROOT_DEPTH}
+                                                         expanded={true}
+                                                         hideReplies={true}/>}
          </div>);
       } else {
         return <div>No data available.</div>

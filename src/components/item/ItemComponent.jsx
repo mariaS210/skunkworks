@@ -54,7 +54,7 @@ class ItemComponent extends React.Component {
             return (
                 <div>
                     <Card border="light" body>
-            <div className="item">{title} {itemLink && hostname}</div>
+                    <div className="item">{title} {itemLink && hostname}</div>
                         <SummaryComponent item={item}
                                           score={score}
                                           changeOpenedStory={this.props.changeOpenedStory}

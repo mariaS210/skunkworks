@@ -4,7 +4,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ApiEndpoints from '../../utils/ApiEndpoints';
-import htmlDecode from '../../utils/helpers';
 
 const MAX_COMMENT_DEPTH = 5;
 
@@ -14,7 +13,7 @@ class CommentListComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: false,
+            expanded: this.props.expanded,
             replies: []
         }
     }
@@ -67,16 +66,16 @@ class CommentListComponent extends React.Component {
         let replies = this.state.replies;
         return (
             <div>
-            <i className="Comment" onClick={()=>{this.updateExpanded()}}>
+            {!this.props.hideReplies && <i className="Comment" onClick={()=>{this.updateExpanded()}}>
                 <FontAwesomeIcon icon={icon} />
                 {this.props.kids.length} replies
-            </i>
+            </i>}
             {expanded && this.fetchReplies()}
             {expanded && <ListGroup variant="flush">
                     {replies.map((comment) => {
                         if (!comment.deleted) {
                             return (<ListGroup.Item key={"itm-" + comment.id}>
-                                    <div key={comment.id}>{htmlDecode(comment.text)}</div>
+                                    <div key={comment.id} dangerouslySetInnerHTML={{ __html: unescape(comment.text)}}/>
                                     <CommentListComponent kids={comment.kids} depth={depth}/>
                                 </ListGroup.Item>);
                         } else {

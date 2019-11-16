@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import ApiEndpoints from '../../utils/ApiEndpoints';
@@ -49,8 +50,13 @@ class ItemListComponent extends React.Component {
         if (!newsItems) {
             newsItems = [];
         }
-
+        const { version } = require('../../../package.json');
         return (
+            <div>
+                <div className="Version">
+                <a href="https://github.com/mariaS210/skunkworks"><FontAwesomeIcon icon={["fab", "github"]}/>
+                {" "}version {version}</a>
+                </div>
             <div className="container">
                 <InfiniteScroll
                     dataLength={newsItems.length} //This is important field to render the next data
@@ -72,6 +78,7 @@ class ItemListComponent extends React.Component {
                             bookmarkAction={this.props.bookmarkAction}/>
                     ))}
                 </InfiniteScroll>
+                </div>
             </div>
         )
     }
