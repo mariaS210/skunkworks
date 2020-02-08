@@ -18,7 +18,7 @@ import {
 } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter, faBookmark, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faBookmark, faAngleDown, faAngleUp, faEye, faLink, faSuitcase, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -27,7 +27,7 @@ import ItemListComponent from './components/list/ItemListComponent';
 import BookmarkListComponent from './components/list/BookmarkListComponent';
 
 
-library.add(faFilter, faBookmark, faAngleDown, faAngleUp, fab);
+library.add(faFilter, faBookmark, faAngleDown, faAngleUp, faEye, faLink, faSuitcase, faQuestion, fab);
 
 
 class App extends React.Component {
