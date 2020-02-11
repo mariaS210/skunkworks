@@ -1,14 +1,17 @@
 import React from 'react';
 
 import ListGroup from 'react-bootstrap/ListGroup';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import ApiEndpoints from '../../utils/ApiEndpoints';
 
 const MAX_COMMENT_DEPTH = 5;
 
 class CommentListComponent extends React.Component {
     _isMounted = false;
+    _sliceLength = 5;
 
     constructor(props) {
         super(props);
@@ -28,6 +31,19 @@ class CommentListComponent extends React.Component {
         }
     }
 
+    fetchNextReplies = () => {
+        let startIndex = this.state.replies.length;
+        let endIndex = startIndex + this._sliceLength;
+        ApiEndpoints.getBulkNewsItemsPaginated(
+            this.props.kids,
+            startIndex, endIndex,
+            this.state.replies,
+            response => this.setState({
+                replies: response
+            })
+        );
+    }
+
     updateReplies = (newReplies) => {
         if (this._isMounted) {
             this.setState({
@@ -36,8 +52,18 @@ class CommentListComponent extends React.Component {
         }
     }
 
-    fetchReplies = () => {
-        ApiEndpoints.getBulkNewsItems(this.props.kids, this.updateReplies);
+    fetchFirstReplies = () => {
+        let initialReplies = []
+        ApiEndpoints.getBulkNewsItemsPaginated(
+            this.props.kids,
+            0, this._sliceLength,
+            initialReplies,
+            this.updateReplies
+        );
+    }
+
+    checkMore = () => {
+        return this.state.replies.length < this.props.kids.length;
     }
     
     componentDidMount() {
@@ -70,8 +96,16 @@ class CommentListComponent extends React.Component {
                 <FontAwesomeIcon icon={icon} />
                 {this.props.kids.length} replies
             </i>}
-            {expanded && this.fetchReplies()}
+            {expanded && this.fetchFirstReplies()}
             {expanded && <ListGroup variant="flush">
+                    <InfiniteScroll
+                        dataLength={replies.length}
+                        next={this.fetchNextReplies}
+                        hasMore={this.checkMore}
+                        loader={<Spinner animation="border"
+                                         variant="secondary"
+                                         size="sm" />}
+                        endMessage={<p>-</p>}>
                     {replies.map((comment) => {
                         if (!comment.deleted) {
                             return (<ListGroup.Item key={"itm-" + comment.id}>
@@ -82,6 +116,7 @@ class CommentListComponent extends React.Component {
                             return <div key={comment.id}><i>Deleted.</i></div>
                         }
                     })}
+                    </InfiniteScroll>
                 </ListGroup>
             }
             </div>

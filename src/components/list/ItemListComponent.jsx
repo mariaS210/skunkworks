@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Spinner from 'react-bootstrap/Spinner';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -62,7 +64,7 @@ class ItemListComponent extends React.Component {
                     dataLength={newsItems.length} //This is important field to render the next data
                     next={this.loadItems}
                     hasMore={true}
-                    loader={<h4>Loading...</h4>}
+                    loader={<Spinner animation="border" variant="dark" />}
                     endMessage={
                         <p style={{ textAlign: 'center' }}>
                             <b>Yay! You have seen it all</b>

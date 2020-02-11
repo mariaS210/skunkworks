@@ -60,6 +60,24 @@ class ApiEndpoints {
             });
         }
     }
+
+    static getBulkNewsItemsPaginated(items, indexStart, indexEnd, results, callback, forceMakeRequest=false) {
+        let requests = []
+        let part = items.slice(indexStart, indexEnd);
+        if (!part) {
+            return results
+        }
+        if (callback) {
+            part.forEach(itemId => {
+                requests.push(new Request(`${BASE_URL}/v0/item/${itemId}.json`));
+            });
+            Promise.all(requests.map(request =>
+                fetch(request).then(response => response.json())
+            )).then(responses => {
+                callback(results.concat(responses));
+            });
+        }
+    }
 }
 
 export default ApiEndpoints;
