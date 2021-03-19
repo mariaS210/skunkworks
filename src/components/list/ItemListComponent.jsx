@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Spinner from 'react-bootstrap/Spinner';
+import Navbar from 'react-bootstrap/Navbar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -55,10 +56,10 @@ class ItemListComponent extends React.Component {
         const { version } = require('../../../package.json');
         return (
             <div>
-                <div className="Version">
-                <a href="https://github.com/mariaS210/skunkworks"><FontAwesomeIcon icon={["fab", "github"]}/>
+                <Navbar fixed="bottom" bg="light">
+                    <a href="https://github.com/mariaS210/skunkworks"><FontAwesomeIcon icon={["fab", "github"]}/>
                 {" "}version {version}</a>
-                </div>
+                </Navbar>
             <div className="container">
                 <InfiniteScroll
                     dataLength={newsItems.length} //This is important field to render the next data

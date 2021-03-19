@@ -22,14 +22,6 @@
   cursor: pointer;
 }
 
-.Version {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  margin-left: 5px;
-  margin-bottom: 15px;
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
