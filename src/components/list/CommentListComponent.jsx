@@ -108,7 +108,7 @@ class CommentListComponent extends React.Component {
                         endMessage={<p>-</p>}>
                     {replies.map((comment) => {
                         if (!comment.deleted) {
-                            return (<ListGroup.Item key={"itm-" + comment.id}>
+                            return (<ListGroup.Item key={"itm-" + comment.id} className="no-border">
                                     <div key={comment.id} dangerouslySetInnerHTML={{ __html: unescape(comment.text)}}/>
                                     <CommentListComponent kids={comment.kids} depth={depth}/>
                                 </ListGroup.Item>);

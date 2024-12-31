@@ -12,7 +12,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 import {
   HashRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link
 } from "react-router-dom";
@@ -84,7 +84,7 @@ class App extends React.Component {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+          <Nav className="ms-auto">
             <Link to="/top" className="nav-link">Top</Link>
             <Link to="/new" className="nav-link">New</Link>
             <Link to="/best" className="nav-link">Best</Link>
@@ -94,7 +94,7 @@ class App extends React.Component {
               <NavDropdown.Item as={Link} to="/job">Job</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Form inline>
+          <Form inline="true">
           <InputGroup className="mr-sm-2">
             <Button as={InputGroup.Prepend} variant="primary"><FontAwesomeIcon icon="filter" /></Button>
             <FormControl
@@ -109,37 +109,37 @@ class App extends React.Component {
         </Navbar.Collapse>
         {bookmarks && <BookmarkListComponent bookmarks={bookmarks}/>}
         </Navbar>
-          <Switch>
-            <Route exact path="/top"
-                   render={(props) => <ItemListComponent endpoint="topstories" key="topstories"
+          <Routes>
+            <Route path="/top"
+                   element={<ItemListComponent endpoint="topstories" key="topstories"
                                                          searchTerm={this.state.term}
                                                          bookmarkAction={this.bookmarkAction}/>} />
-            <Route exact path="/new"
-                   render={(props) => <ItemListComponent endpoint="newstories" key="newstories"
+            <Route path="/new"
+                   element={<ItemListComponent endpoint="newstories" key="newstories"
                                                          searchTerm={this.state.term}
                                                          bookmarkAction={this.bookmarkAction}/>} />
-            <Route exact path="/best"
-                   render={(props) => <ItemListComponent endpoint="beststories" key="beststories"
+            <Route path="/best"
+                   element={<ItemListComponent endpoint="beststories" key="beststories"
                                                          searchTerm={this.state.term}
                                                          bookmarkAction={this.bookmarkAction}/>} />
-            <Route exact path="/ask"
-                   render={(props) => <ItemListComponent endpoint="askstories" key="askstories"
+            <Route path="/ask"
+                   element={<ItemListComponent endpoint="askstories" key="askstories"
                                                          searchTerm={this.state.term}
                                                          bookmarkAction={this.bookmarkAction}/>} />
-            <Route exact path="/show"
-                   render={(props) => <ItemListComponent endpoint="showstories" key="showstories"
+            <Route path="/show"
+                   element={<ItemListComponent endpoint="showstories" key="showstories"
                                                          searchTerm={this.state.term}
                                                          bookmarkAction={this.bookmarkAction}/>} />
 
-            <Route exact path="/job"
-                   render={(props) => <ItemListComponent endpoint="jobstories" key="jobstories"
+            <Route path="/job"
+                   element={<ItemListComponent endpoint="jobstories" key="jobstories"
                                                          searchTerm={this.state.term}
                                                          bookmarkAction={this.bookmarkAction}/>} />
-            <Route exact path="/"
-                   render={(props) => <ItemListComponent endpoint="topstories"  key="home"
+            <Route path="/"
+                   element={<ItemListComponent endpoint="topstories"  key="home"
                                                          searchTerm={this.state.term}
                                                          bookmarkAction={this.bookmarkAction}/>} />
-          </Switch>
+          </Routes>
       </Router>
     );
   }

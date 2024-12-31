@@ -14,15 +14,25 @@ class ItemComponent extends React.Component {
             index: this.props.index,
             searchTerm: this.props.searchTerm,
         };
+        this._isMounted = false;
     }
 
     componentDidMount() {
+        this._isMounted = true;
         ApiEndpoints.getNewsItem(
             this.props.itemId,
-            response => this.setState({
+            response => {
+                if (this._isMounted) {
+                    this.setState({
                     item: response
-                })
+                    });
+                }
+            }
         );
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     parseURL = (itemLink) => {
